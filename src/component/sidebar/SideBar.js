@@ -19,7 +19,6 @@ function SideBar() {
         <div className="header">
           <div className="logo">
             <Link to="/">
-            
               {/* <img src={Logo} alt="" className="image" /> */}
               keka
             </Link>
