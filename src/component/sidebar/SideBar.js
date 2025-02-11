@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 // import Logo from "../assets/images/logo.jpg";
 import {
-    FaBuilding,
-    FaComments,
-    FaHome,
-    FaInbox,
-    FaMoneyBillWave,
-    FaUser,
-    FaUsers,
+  FaBuilding,
+  FaComments,
+  FaHome,
+  FaInbox,
+  FaMoneyBillWave,
+  FaUser,
+  FaUsers,
 } from "react-icons/fa";
 import "./SideBar.css";
 
@@ -19,6 +19,7 @@ function SideBar() {
         <div className="header">
           <div className="logo">
             <Link to="/">
+            
               {/* <img src={Logo} alt="" className="image" /> */}
               keka
             </Link>
