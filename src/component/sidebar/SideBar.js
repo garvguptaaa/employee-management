@@ -20,6 +20,7 @@ function SideBar() {
           <div className="logo">
             <Link to="/">
               {/* <img src={Logo} alt="" className="image" /> */}
+              {/* sssdsd */}
               keka
             </Link>
           </div>
