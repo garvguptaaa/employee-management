@@ -10,7 +10,10 @@
   }
   .logo{
    background-color: rgb(18, 77, 119);
-   padding: 16.5px;
+   /* padding: 16.5px; */
+   width: 100.5px;
+   padding-top: 14px;
+   
   }
   .header {
     list-style: none;
@@ -21,7 +24,7 @@
     display: flex;
   }
   .text{
-    padding-left: 30px;
+    padding-left: 20px;
     font-size: 14px;
     margin-top: 4px;
   }
