@@ -1,62 +1,68 @@
-import React, { useState } from 'react';
-import { Link,  useNavigate } from "react-router-dom"; 
-import './LoginPage.css'; 
+import React from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import "./LoginPage.css";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-
   const navigate = useNavigate();
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-
-    const storedEmail = 'user@example.com';
-    const storedPassword = 'password123';
-
-    if (email === storedEmail && password === storedPassword) {
-      localStorage.setItem('user', JSON.stringify({ email }));
-      
-      navigate("/"); 
-    } else {
-      setError('Invalid email or password');
-    }
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+  console.log('errors',errors)
+  const handleLogin = (data) => {
+    console.log("data", data);
+    navigate("/home");
   };
 
   return (
     <div className="login-container">
       <div className="login-box">
         <h2>Login to TeamPulse</h2>
-        
+
         {/* Show error message if invalid credentials */}
-        {error && <div className="error-message">{error}</div>}
-        
-        <form onSubmit={handleLogin}>
+
+        <form onSubmit={handleSubmit(handleLogin)}>
           <div className="input-group">
             <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)} // Handle input change
-              required
+              type="text"
+              autoComplete="off"
+              placeholder="Email"
+              {...register("email", {
+                required: true,
+                pattern: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+              })}
             />
+            <div>
+              {errors.email && (
+                <span className="text-danger fs-12">{errors.email.type == 'pattern' ? 'Please Enter Valid Email' : 'Please Enter Email'}</span>
+              )}
+            </div>
           </div>
 
           <div className="input-group">
             <input
               type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)} // Handle input change
-              required
+              placeholder="Password"
+              {...register("password", {
+                required: true,
+                // pattern: /^^(?=.*[A-Za-z0-9])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,20}$/
+              })}
             />
+            <div>
+              {errors.password && (
+                <span className="text-danger fs-12">Please Enter Password</span>
+              )}
+            </div>
           </div>
 
-          <button type="submit" className="login-btn">Login</button>
+          <button type="submit" className="login-btn">
+            Login
+          </button>
 
           <div className="forgot-password">
-          <Link to="/forget password">forget password?</Link>
+            <Link to="/forget password">forget password?</Link>
           </div>
         </form>
       </div>

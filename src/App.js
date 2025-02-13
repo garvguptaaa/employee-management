@@ -1,4 +1,4 @@
-import {  Route, Routes  } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
 
 import SideBar from './component/sidebar/SideBar';
@@ -11,10 +11,10 @@ function App() {
       <div className="App">
         <SideBar/>  
         <Routes>
-          <Route path="/" element={<Home/>} />
+          <Route path="/home" element={<Home/>} />
           <Route path="/profile" element={<ProfilePage/>} />
         </Routes> 
-       {/* <LoginPage/> */}
+       <LoginPage/>
       </div>
   );
 }
