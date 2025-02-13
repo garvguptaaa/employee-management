@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 
-const LoginPage = () => {
+const LoginPage = (props) => {
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -12,7 +12,8 @@ const LoginPage = () => {
   } = useForm();
   console.log('errors',errors)
   const handleLogin = (data) => {
-    console.log("data", data);
+    localStorage.setItem('UserData',JSON.stringify(data));
+    props.onLogin()
     navigate("/home");
   };
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import Logo from "../assets/images/logo.jpg";
 import profileImage from "../../assets/ProfilePhoto.png";
 
@@ -14,13 +14,17 @@ import {
 } from "react-icons/fa";
 import "./SideBar.css";
 
-function SideBar() {
+function SideBar(props) {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  const handleLinkClick = () => {
+  const Logout = () => {
+    localStorage.clear();
+    props.onLogout();
+    navigate("/login");
     setIsOpen(false);
   };
   return (
@@ -49,14 +53,15 @@ function SideBar() {
           </div>
           {isOpen && (
             <div className="dropdown-content">
-              <Link to="/profile" onClick={handleLinkClick}>
-                
+              <Link
+                to="/profile"
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+              >
                 My Profile
               </Link>
-              <Link to="/loginpage" onClick={handleLinkClick}>
-                
-                Logout
-              </Link>
+              <a onClick={Logout}>Logout</a>
               <div className="theme-container">
                 <form>
                   <input
