@@ -1,0 +1,112 @@
+.profile-container{
+    padding: 50px 125px;
+    background-color: rgb(5, 26, 41) ;
+    height: 100vh;
+}
+.profile{
+    /* border: 2px solid rgb(151, 150, 150); */
+    height: 229px;
+    margin-top: 25px;
+    margin-left: 25px;
+    width: 185vh;
+}
+.profile-content{
+    padding: 17px 17px;
+    background-color: var(--side-header-color,rgb(18, 77, 119));
+    /* width: 175px; */
+    
+}
+.profile-img{
+    border-radius: 12px;
+    height: 150px;
+    width: 150px;
+}
+.profile-photo{
+    display: flex;
+}
+.profile-detail{
+    background-color: var(--side-header, rgb(11, 45, 70));
+    height: 116.5px;
+    width: 100%;
+    padding: 17px 17px;
+    margin-left: 10px;
+    border-radius: 12px;
+
+}
+.main-detail{
+    height: 44px;
+    width: 100%;
+}
+
+.navbar {
+    background-color: var(--side-header, rgb(11, 45, 70));
+    padding: 10px 0;
+    /* text-align: center; */
+    height: 25px;
+    width: 100%;
+
+  }
+  
+  .nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links li {
+    display: inline;
+    margin: 0 20px;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .nav-links a:hover {
+    background-color: rgb(16, 63, 97);
+  }
+  .personal-info{
+    display: flex;
+  }
+  .info-item{
+     display: inline;
+     padding: 10px 10px;
+     color: white;
+  }
+  .info-item span{
+    padding: 10px 11px;
+    color: white;
+    font-size: 12px;
+ }
+  .name{
+    padding: 10px 10px;
+    color: white;
+    font-size: 20px;
+  }
+  .dropdown1{
+    color: white;
+    position: absolute;
+    margin-left: 1000px;
+   margin-top: 2px;
+    display: flex;
+  }
+  .dropdown-menu{
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 5px 12px 16px rgba(248, 246, 246, 0.2);
+    z-index: 1;
+    color: black;
+  }
+  .dropdown-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
