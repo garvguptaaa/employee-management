@@ -26,60 +26,72 @@ const AddEditRole = (props) => {
         <div style={{ fontWeight: 'bold', fontSize: '25px' }} className="m-1">
           <span>MANAGE ROLES</span>
         </div>
-        <div className="user-shadow">
-          <div className="filter-header">
-            <Col lg={12}>
-              <Row>
-                <Col lg={3}>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      id="search"
-                      placeholder="Search Role"
-                      className="form-control"
-                      {...register("search", { required: false })}
-                    />
-                  </div>
-                </Col>
-                <Col lg={2}>
-                  <button type="submit" className="btn btn-primary">
-                    Search
-                  </button>
-                </Col>
-                <Col lg={7} style={{ textAlign: 'right' }}>
-                  <button onClick={() => setIsOpen(true)} className="btn btn-primary">
-                    Add Role
-                  </button>
-                </Col>
-              </Row>
-            </Col>
-          </div>
+        <form onSubmit={handleSubmit(handleLogin)}>
+          <div className="user-shadow">
+            <div className="filter-header">
+              <Col lg={12}>
+                <Row>
+                  <Col lg={3}>
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        autoComplete="off"
+                        placeholder="Role Name"
+                        {...register("name", {
+                          required: true,
+                        })}
+                      />
+                      <div>
+                        {errors.name && (
+                          <span className="text-danger fs-12">Please Enter Role Name.</span>
+                        )}
+                      </div>
+                    </div>
+                  </Col>
+                  <Col lg={7} style={{ textAlign: 'right' }}>
 
-          <div className="user-table m-3">
-            <table className="table table-bordered">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>ALL PERMISSION</td>
-                  <td>
-                    <button className="btn btn-warning">Edit</button>
-                    <button className="btn btn-danger" style={{ marginLeft: '10px' }}>Delete</button>
-                  </td>
-                </tr>
-                {/* Add more rows as needed */}
-              </tbody>
-            </table>
+                  </Col>
+                </Row>
+              </Col>
+            </div>
+
+            <div className="user-table m-3">
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Menu</th>
+                    <th>Is View</th>
+                    <th>is Add</th>
+                    <th>is Edit</th>
+                    <th>is Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Manage User</td>
+                    <td><input type="checkbox" /></td>
+                    <td><input type="checkbox" /></td>
+                    <td><input type="checkbox" /></td>
+                    <td><input type="checkbox" /></td>
+                  </tr>
+                  <tr>
+                    <td>Manage Role</td>
+                    <td><input type="checkbox" /></td>
+                    <td><input type="checkbox" /></td>
+                    <td><input type="checkbox" /></td>
+                    <td><input type="checkbox" /></td>
+                  </tr>
+                  {/* Add more rows as needed */}
+                </tbody>
+              </table>
+              <button onClick={() => navigate('/add-role')} className="btn btn-primary">
+                Submit
+              </button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
-    </div>
+    </div >
   );
 };
 

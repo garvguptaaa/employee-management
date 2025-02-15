@@ -45,7 +45,7 @@ const ManageRole = (props) => {
                   </button>
                 </Col>
                 <Col lg={7} style={{ textAlign: 'right' }}>
-                  <button className="btn btn-primary">
+                  <button onClick={() => navigate('/add-role')} className="btn btn-primary">
                     Add Role
                   </button>
                 </Col>

@@ -6,6 +6,7 @@ import LoginPage from "./pages/login/LoginPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import ManageRole from "./pages/manage-role/ManageRole";
 import ManageUser from "./pages/manage-user/ManageUser";
+import AddEditRole from "./pages/manage-role/add-edit-role";
 
 function App() {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ function App() {
             <Route path="/" element={<Navigate replace to="/home" />} />
             <Route path="/home" element={<Home onLogout={() => {
               checkLogin();
-            }}s />} />
+            }} s />} />
             <Route path="/profile" element={<ProfilePage onLogout={() => {
               checkLogin();
             }} />} />
@@ -58,7 +59,12 @@ function App() {
             }} />} />
             <Route path="/manage-role" element={<ManageRole onLogout={() => {
               checkLogin();
-            }} />} />
+            }} />
+            } />
+            <Route path="/add-role" element={<AddEditRole onLogout={() => {
+              checkLogin();
+            }} />
+            } />
           </>
         )}
       </Routes>
