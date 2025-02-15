@@ -5,6 +5,7 @@ import {
   Col, Offcanvas, OffcanvasBody, OffcanvasHeader, Row
 } from "reactstrap";
 import "./ManageUser.css";
+import axios from 'axios';
 
 const ManageUser = (props) => {
   const navigate = useNavigate();
@@ -14,8 +15,19 @@ const ManageUser = (props) => {
     register,
     formState: { errors },
   } = useForm();
-  const handleLogin = (data) => {
-    console.log('data', data)
+
+
+  const onSave = (data) => {
+    const baseURL = 'http://your-api-base-url.com'; // Replace with your actual base URL
+    axios.post(`${baseURL}/add-user`, data)
+      .then(response => {
+      console.log('User added successfully', response);
+      setIsOpen(false);
+      navigate('/manage-user'); // Navigate to user list or any other page
+      })
+      .catch(error => {
+      console.error('There was an error adding the user!', error);
+      });
   };
 
   return (
@@ -89,7 +101,7 @@ const ManageUser = (props) => {
         </OffcanvasHeader>
         <OffcanvasBody>
           <strong>
-            <form onSubmit={handleSubmit(handleLogin)}>
+            <form onSubmit={handleSubmit(onSave)}>
               <div className="input-group">
                 <input
                   type="text"
