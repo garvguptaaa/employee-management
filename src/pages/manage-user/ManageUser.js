@@ -1,39 +1,93 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
-  Col, Offcanvas, OffcanvasBody, OffcanvasHeader, Row
+  Col,
+  Offcanvas,
+  OffcanvasBody,
+  OffcanvasHeader,
+  Row,
 } from "reactstrap";
 import "./ManageUser.css";
-import axios from 'axios';
 
 const ManageUser = (props) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [data, setdata] = useState([]);
+
   const {
     handleSubmit,
+    reset,
     register,
+    watch,
     formState: { errors },
   } = useForm();
 
-
-  const onSave = (data) => {
-    const baseURL = 'http://your-api-base-url.com'; // Replace with your actual base URL
-    axios.post(`${baseURL}/add-user`, data)
-      .then(response => {
-      console.log('User added successfully', response);
-      setIsOpen(false);
-      navigate('/manage-user'); // Navigate to user list or any other page
+  const watchAllfields = watch();
+  useEffect(() => {
+    getUserList();
+  }, []);
+  const getUserList = async () => {
+    const baseURL = "http://localhost:8080/";
+    axios
+      .get(`${baseURL}users/list`, {})
+      .then((response) => {
+        setdata(response.data);
       })
-      .catch(error => {
-      console.error('There was an error adding the user!', error);
+      .catch((error) => {
+        console.error("There was an error adding the user!", error);
+      });
+  };
+  const onSave = (data) => {
+    const baseURL = "http://localhost:8080/";
+    axios
+      .post(`${baseURL}users`, data)
+      .then((response) => {
+        if (data.id) {
+          console.log("User update successfully", response);
+        } else {
+          console.log("User added successfully", response);
+        }
+        setIsOpen(false);
+        reset({});
+        getUserList();
+        // navigate("/manage-user"); // Navigate to user list or any other page
+      })
+      .catch((error) => {
+        console.error("There was an error adding the user!", error);
+      });
+  };
+  const deleteUser = (id) => {
+    const baseURL = "http://localhost:8080/";
+    axios
+      .delete(`${baseURL}users/${id}`)
+      .then((response) => {
+        console.log("User deleted successfully", response);
+        getUserList();
+        // navigate("/manage-user"); // Navigate to user list or any other page
+      })
+      .catch((error) => {
+        console.error("There was an error adding the user!", error);
+      });
+  };
+  const openUserPopUpForUpdate = (id) => {
+    const baseURL = "http://localhost:8080/";
+    axios
+      .get(`${baseURL}users/${id}`)
+      .then((response) => {
+        setIsOpen(true);
+        reset(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error adding the user!", error);
       });
   };
 
   return (
     <div className="user-container">
       <div className="header-class header-shadow">
-        <div style={{ fontWeight: 'bold', fontSize: '25px' }} className="m-1">
+        <div style={{ fontWeight: "bold", fontSize: "25px" }} className="m-1">
           <span>MANAGE USER</span>
         </div>
         <div className="user-shadow">
@@ -47,7 +101,6 @@ const ManageUser = (props) => {
                       id="search"
                       placeholder="Search User"
                       className="form-control"
-                      {...register("search", { required: false })}
                     />
                   </div>
                 </Col>
@@ -56,8 +109,14 @@ const ManageUser = (props) => {
                     Search
                   </button>
                 </Col>
-                <Col lg={7} style={{ textAlign: 'right' }}>
-                  <button onClick={() => setIsOpen(true)} className="btn btn-primary">
+                <Col lg={7} style={{ textAlign: "right" }}>
+                  <button
+                    onClick={() => {
+                      setIsOpen(true);
+                      reset({});
+                    }}
+                    className="btn btn-primary"
+                  >
                     Add User
                   </button>
                 </Col>
@@ -77,16 +136,35 @@ const ManageUser = (props) => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>John Doe</td>
-                  <td>john.doe@example.com</td>
-                  <td>Admin</td>
-                  <td>
-                    <button className="btn btn-warning">Edit</button>
-                    <button className="btn btn-danger" style={{ marginLeft: '10px' }}>Delete</button>
-                  </td>
-                </tr>
+                {data &&
+                  data.map((item, index) => {
+                    return (
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>
+                          {item.first_name} {item.last_name}
+                        </td>
+                        <td>{item.email}</td>
+                        <td>Admin</td>
+                        <td>
+                          <button
+                            onClick={() => openUserPopUpForUpdate(item.id)}
+                            className="btn btn-warning"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => deleteUser(item.id)}
+                            style={{ marginLeft: "10px" }}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+
                 {/* Add more rows as needed */}
               </tbody>
             </table>
@@ -94,10 +172,19 @@ const ManageUser = (props) => {
         </div>
       </div>
 
-
-      <Offcanvas direction="end" toggle={function noRefCheck() { }} isOpen={isOpen} >
-        <OffcanvasHeader toggle={function noRefCheck() { }} onClick={() => setIsOpen(false)}>
-          Add user
+      <Offcanvas
+        direction="end"
+        toggle={function noRefCheck() {}}
+        isOpen={isOpen}
+      >
+        <OffcanvasHeader
+          toggle={function noRefCheck() {}}
+          onClick={() => {
+            reset({});
+            setIsOpen(false);
+          }}
+        >
+          {watchAllfields.id ? "Update" : "Add"} User
         </OffcanvasHeader>
         <OffcanvasBody>
           <strong>
@@ -113,7 +200,9 @@ const ManageUser = (props) => {
                 />
                 <div>
                   {errors.first_name && (
-                    <span className="text-danger fs-12">Please Enter First Name.</span>
+                    <span className="text-danger fs-12">
+                      Please Enter First Name.
+                    </span>
                   )}
                 </div>
               </div>
@@ -129,7 +218,9 @@ const ManageUser = (props) => {
                 />
                 <div>
                   {errors.last_name && (
-                    <span className="text-danger fs-12">Please Enter last Name.</span>
+                    <span className="text-danger fs-12">
+                      Please Enter last Name.
+                    </span>
                   )}
                 </div>
               </div>
@@ -145,7 +236,11 @@ const ManageUser = (props) => {
                 />
                 <div>
                   {errors.email && (
-                    <span className="text-danger fs-12">{errors.email.type == 'pattern' ? 'Please Enter Valid Email' : 'Please Enter Email'}</span>
+                    <span className="text-danger fs-12">
+                      {errors.email.type == "pattern"
+                        ? "Please Enter Valid Email"
+                        : "Please Enter Email"}
+                    </span>
                   )}
                 </div>
               </div>
@@ -160,11 +255,13 @@ const ManageUser = (props) => {
                 />
                 <div>
                   {errors.mobile && (
-                    <span className="text-danger fs-12">Please Enter Mobile.</span>
+                    <span className="text-danger fs-12">
+                      Please Enter Mobile.
+                    </span>
                   )}
                 </div>
               </div>
-              <div >
+              <div>
                 <select
                   className="select-control"
                   {...register("role_id", {
@@ -172,13 +269,15 @@ const ManageUser = (props) => {
                   })}
                 >
                   <option value="">Select Role</option>
-                  <option value="Admin">Admin</option>
-                  <option value="User">User</option>
-                  <option value="Manager">Manager</option>
+                  <option value="1">Admin</option>
+                  <option value="2">User</option>
+                  <option value="3">Manager</option>
                 </select>
                 <div>
                   {errors.role_id && (
-                    <span className="text-danger fs-12">Please Select Role.</span>
+                    <span className="text-danger fs-12">
+                      Please Select Role.
+                    </span>
                   )}
                 </div>
               </div>
@@ -190,7 +289,6 @@ const ManageUser = (props) => {
           </strong>
         </OffcanvasBody>
       </Offcanvas>
-
     </div>
   );
 };

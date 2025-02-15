@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
-  Col, Offcanvas, OffcanvasBody, OffcanvasHeader, Row
+  Col,
+  Row
 } from "reactstrap";
 import "./ManageRole.css";
 

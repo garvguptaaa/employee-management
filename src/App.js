@@ -54,7 +54,7 @@ function App() {
             <Route path="/" element={<Navigate replace to="/home" />} />
             <Route path="/home" element={<Home onLogout={() => {
               checkLogin();
-            }} s />} />
+            }}  />} />
             <Route path="/profile" element={<ProfilePage onLogout={() => {
               checkLogin();
             }} />} />

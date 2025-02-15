@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import "./ProfilePage.css";
-import { Link } from "react-router-dom";
 import {
-  FaUserTag,
-  FaEnvelope,
-  FaPhoneAlt,
-  FaMapMarkerAlt,
   FaEllipsisH,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaUserTag,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import profileImage from "../../assets/ProfilePhoto.png";
+import "./ProfilePage.css";
 
 function ProfilePage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -21,7 +21,7 @@ function ProfilePage() {
   };
   return (
     <>
-      <div className="profile-container">
+      <div className="user-container">
         <div className="profile">
           <div className="profile-content">
             <div className="profile-photo">
