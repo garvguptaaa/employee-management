@@ -1,12 +1,14 @@
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import {
-  Col, Row
+  Col, Offcanvas, OffcanvasBody, OffcanvasHeader, Row
 } from "reactstrap";
 import "./ManageRole.css";
 
-const ManageRole = (props) => {
+const AddEditRole = (props) => {
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
   const {
     handleSubmit,
     register,
@@ -45,7 +47,7 @@ const ManageRole = (props) => {
                   </button>
                 </Col>
                 <Col lg={7} style={{ textAlign: 'right' }}>
-                  <button className="btn btn-primary">
+                  <button onClick={() => setIsOpen(true)} className="btn btn-primary">
                     Add Role
                   </button>
                 </Col>
@@ -81,4 +83,4 @@ const ManageRole = (props) => {
   );
 };
 
-export default ManageRole;
+export default AddEditRole;

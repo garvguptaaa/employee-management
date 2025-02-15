@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom"; import {
+import { Link, useNavigate } from "react-router-dom";
+import {
   Col, Offcanvas, OffcanvasBody, OffcanvasHeader, Row
 } from "reactstrap";
 import "./ManageUser.css";
 
 const ManageUser = (props) => {
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
-  const [isOpen, setIsOpen] = useState(false);
   const handleLogin = (data) => {
     console.log('data', data)
   };
@@ -82,7 +83,7 @@ const ManageUser = (props) => {
       </div>
 
 
-      <Offcanvas toggle={function noRefCheck() { }} isOpen={isOpen}>
+      <Offcanvas direction="end" toggle={function noRefCheck() { }} isOpen={isOpen} >
         <OffcanvasHeader toggle={function noRefCheck() { }} onClick={() => setIsOpen(false)}>
           Add user
         </OffcanvasHeader>
