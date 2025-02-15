@@ -5,10 +5,10 @@
 }
 .profile{
     /* border: 2px solid rgb(151, 150, 150); */
-    height: 229px;
+    height: 90vh;
     margin-top: 25px;
     margin-left: 25px;
-    width: 185vh;
+    width: 89vw;
 }
 .profile-content{
     padding: 17px 17px;

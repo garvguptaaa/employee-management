@@ -14,6 +14,7 @@ const LoginPage = (props) => {
   const handleLogin = (data) => {
     localStorage.setItem('UserData',JSON.stringify(data));
     props.onLogin()
+    
     navigate("/home");
   };
 
