@@ -43,6 +43,22 @@ body {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   font-weight: 600 !important;
 }
+.select-control{
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 6px 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #000 !important;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-weight: 600 !important;
+}
 .header-shadow {
   box-shadow: 0 4px 8px grey, 0 6px 20px grey;;
   height: 8vh;

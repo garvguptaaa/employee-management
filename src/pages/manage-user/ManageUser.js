@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom"; import {
-  Col, Row
+  Col, Offcanvas, OffcanvasBody, OffcanvasHeader, Row
 } from "reactstrap";
 import "./ManageUser.css";
 
@@ -12,11 +12,9 @@ const ManageUser = (props) => {
     register,
     formState: { errors },
   } = useForm();
-  console.log('errors', errors)
+  const [isOpen, setIsOpen] = useState(false);
   const handleLogin = (data) => {
-    localStorage.setItem('UserData', JSON.stringify(data));
-    props.onLogin()
-    navigate("/home");
+    console.log('data', data)
   };
 
   return (
@@ -46,7 +44,7 @@ const ManageUser = (props) => {
                   </button>
                 </Col>
                 <Col lg={7} style={{ textAlign: 'right' }}>
-                  <button type="submit" className="btn btn-primary">
+                  <button onClick={() => setIsOpen(true)} className="btn btn-primary">
                     Add User
                   </button>
                 </Col>
@@ -82,6 +80,103 @@ const ManageUser = (props) => {
           </div>
         </div>
       </div>
+
+
+      <Offcanvas toggle={function noRefCheck() { }} isOpen={isOpen}>
+        <OffcanvasHeader toggle={function noRefCheck() { }} onClick={() => setIsOpen(false)}>
+          Add user
+        </OffcanvasHeader>
+        <OffcanvasBody>
+          <strong>
+            <form onSubmit={handleSubmit(handleLogin)}>
+              <div className="input-group">
+                <input
+                  type="text"
+                  autoComplete="off"
+                  placeholder="First Name"
+                  {...register("first_name", {
+                    required: true,
+                  })}
+                />
+                <div>
+                  {errors.first_name && (
+                    <span className="text-danger fs-12">Please Enter First Name.</span>
+                  )}
+                </div>
+              </div>
+
+              <div className="input-group">
+                <input
+                  type="text"
+                  autoComplete="off"
+                  placeholder="Last Name"
+                  {...register("last_name", {
+                    required: true,
+                  })}
+                />
+                <div>
+                  {errors.last_name && (
+                    <span className="text-danger fs-12">Please Enter last Name.</span>
+                  )}
+                </div>
+              </div>
+              <div className="input-group">
+                <input
+                  type="text"
+                  autoComplete="off"
+                  placeholder="Email"
+                  {...register("email", {
+                    required: true,
+                    pattern: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+                  })}
+                />
+                <div>
+                  {errors.email && (
+                    <span className="text-danger fs-12">{errors.email.type == 'pattern' ? 'Please Enter Valid Email' : 'Please Enter Email'}</span>
+                  )}
+                </div>
+              </div>
+              <div className="input-group">
+                <input
+                  type="text"
+                  autoComplete="off"
+                  placeholder="Mobile Number"
+                  {...register("mobile", {
+                    required: true,
+                  })}
+                />
+                <div>
+                  {errors.mobile && (
+                    <span className="text-danger fs-12">Please Enter Mobile.</span>
+                  )}
+                </div>
+              </div>
+              <div >
+                <select
+                  className="select-control"
+                  {...register("role_id", {
+                    required: true,
+                  })}
+                >
+                  <option value="">Select Role</option>
+                  <option value="Admin">Admin</option>
+                  <option value="User">User</option>
+                  <option value="Manager">Manager</option>
+                </select>
+                <div>
+                  {errors.role_id && (
+                    <span className="text-danger fs-12">Please Select Role.</span>
+                  )}
+                </div>
+              </div>
+              <hr />
+              <button type="submit" className="login-btn">
+                Submit
+              </button>
+            </form>
+          </strong>
+        </OffcanvasBody>
+      </Offcanvas>
 
     </div>
   );
