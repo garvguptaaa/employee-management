@@ -37,7 +37,7 @@ function SideBar(props) {
           </Link>
         </div>
         <div className="text">
-          <p> EMPLOYEE MANAGEMENT APP</p>
+          {/* <p> EMPLOYEE MANAGEMENT APP</p> */}
         </div>
         <div className="search-container">
           <form>
@@ -96,23 +96,23 @@ function SideBar(props) {
                 <div className="side-icon">
                   <FaHome align size={17} color="white" />
                 </div>
-                <div className="side-icon-name"> Home</div>
+                <div className="side-icon-name"> Dashboard</div>
               </Link>
             </li>
             <li>
-              <Link to="/me">
+              <Link to="/manage-user">
                 <div className="side-icon">
                   <FaUser size={17} color="white" />
                 </div>
-                <div className="side-icon-name"> Me</div>
+                <div className="side-icon-name"> Manage User</div>
               </Link>
             </li>
             <li>
-              <Link to="/inbox">
+              <Link to="/manage-role">
                 <div className="side-icon">
                   <FaInbox size={17} color="white" />
                 </div>
-                <div className="side-icon-name">Inbox</div>
+                <div className="side-icon-name">Manage Role</div>
               </Link>
             </li>
             <li>
