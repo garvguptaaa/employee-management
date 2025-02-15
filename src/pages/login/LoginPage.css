@@ -28,14 +28,14 @@ body {
     max-width: 400px;
     width: 100%;
   }
-  
-h2 {
+
+/* h2 {
     font-family: sans-serif;
     font-size: 30px; 
     color: #0d6868;
     margin-bottom: 40px;
     text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
-}
+} */
   
   
   .input-group {

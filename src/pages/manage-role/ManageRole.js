@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; import {
+  Col, Row
+} from "reactstrap";
 import "./ManageRole.css";
 
 const ManageRole = (props) => {
@@ -10,63 +12,73 @@ const ManageRole = (props) => {
     register,
     formState: { errors },
   } = useForm();
-  console.log('errors',errors)
+  console.log('errors', errors)
   const handleLogin = (data) => {
-    localStorage.setItem('UserData',JSON.stringify(data));
+    localStorage.setItem('UserData', JSON.stringify(data));
     props.onLogin()
     navigate("/home");
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <h2>Login to TeamPulse</h2>
-
-        {/* Show error message if invalid credentials */}
-
-        <form onSubmit={handleSubmit(handleLogin)}>
-          <div className="input-group">
-            <input
-              type="text"
-              autoComplete="off"
-              placeholder="Email"
-              {...register("email", {
-                required: true,
-                pattern: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
-              })}
-            />
-            <div>
-              {errors.email && (
-                <span className="text-danger fs-12">{errors.email.type == 'pattern' ? 'Please Enter Valid Email' : 'Please Enter Email'}</span>
-              )}
-            </div>
+    <div className="user-container">
+      <div className="header-class header-shadow">
+        <div style={{ fontWeight: 'bold', fontSize: '25px' }} className="m-1">
+          <span>MANAGE ROLES</span>
+        </div>
+        <div className="user-shadow">
+          <div className="filter-header">
+            <Col lg={12}>
+              <Row>
+                <Col lg={3}>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      id="search"
+                      placeholder="Search Role"
+                      className="form-control"
+                      {...register("search", { required: false })}
+                    />
+                  </div>
+                </Col>
+                <Col lg={2}>
+                  <button type="submit" className="btn btn-primary">
+                    Search
+                  </button>
+                </Col>
+                <Col lg={7} style={{ textAlign: 'right' }}>
+                  <button type="submit" className="btn btn-primary">
+                    Add Role
+                  </button>
+                </Col>
+              </Row>
+            </Col>
           </div>
 
-          <div className="input-group">
-            <input
-              type="password"
-              placeholder="Password"
-              {...register("password", {
-                required: true,
-                // pattern: /^^(?=.*[A-Za-z0-9])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,20}$/
-              })}
-            />
-            <div>
-              {errors.password && (
-                <span className="text-danger fs-12">Please Enter Password</span>
-              )}
-            </div>
+          <div className="user-table m-3">
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>ALL PERMISSION</td>
+                  <td>
+                    <button className="btn btn-warning">Edit</button>
+                    <button className="btn btn-danger" style={{ marginLeft: '10px' }}>Delete</button>
+                  </td>
+                </tr>
+                {/* Add more rows as needed */}
+              </tbody>
+            </table>
           </div>
-
-          <button type="submit" className="login-btn">
-            Login
-          </button>
-
-          <div className="forgot-password">
-            <Link to="/forget password">forget password?</Link>
-          </div>
-        </form>
+        </div>
       </div>
+
     </div>
   );
 };
