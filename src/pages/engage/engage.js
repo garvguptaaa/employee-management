@@ -14,18 +14,7 @@ function Engage() {
               <img decoding="async" src="icons/communities.svg" alt="" class="icon" />
               <img decoding="async" src="icons/status.svg" alt="" class="icon" />
               <img decoding="async" src="icons/new-chat.svg" alt="" class="icon" />
-              <div class="dropdown">
-                <img decoding="async" src="icons/menu.svg" alt="" class="icon dropdown-button" />
-                <div class="dropdown-content">
-                  <a href="#">New group</a>
-                  <a href="#">New community</a>
-                  <a href="#">Archived</a>
-                  <a href="#">Starred messages</a>
-                  <a href="#">Select chats</a>
-                  <a href="#">Settings</a>
-                  <a href="#">Log out</a>
-                </div>
-              </div>
+            
             </div>
           </div> {/* Closing div for sidebar-header */}
           <img decoding="async" src="icons/filter.svg" alt="" class="icon" />
@@ -117,20 +106,7 @@ function Engage() {
                 <div class="info">You and 69 others</div>
               </div>
               <img decoding="async" src="icons/search.svg" alt="" class="icon" />
-              <div class="dropdown">
-                <img decoding="async" src="icons/menu.svg" alt="" class="icon dropdown-button" />
-                <div class="dropdown-content contact-menu">
-                  <a href="#">Contact info</a>
-                  <a href="#">Select messages</a>
-                  <a href="#">Close chat</a>
-                  <a href="#">Mute notifications</a>
-                  <a href="#">Disappearing messages</a>
-                  <a href="#">Clear messages</a>
-                  <a href="#">Delete chat</a>
-                  <a href="#">Report</a>
-                  <a href="#">Block</a>
-                </div>
-              </div>
+              
             </div>
           </div>
           <div id="chat-window-contents">
@@ -201,13 +177,13 @@ function Engage() {
 
 
           </div>
-          <div id="chat-window-footer">
+          {/* <div id="chat-window-footer">
             <img decoding="async" src="icons/emoji.svg" alt="" class="icon" />
             <img decoding="async" src="icons/attachment.svg" alt="" class="icon" />
 
             <img decoding="async" src="icons/mic.svg" alt="" class="icon" />
-          </div>
-          <a class="scroll-to-top-button" href="#"><img decoding="async" src="icons/arrow-down.svg" alt="" class="icon scroll-to-top-button-icon" height="" /></a>
+          </div> */}
+          {/* <a class="scroll-to-top-button" href="#"><img decoding="async" src="icons/arrow-down.svg" alt="" class="icon scroll-to-top-button-icon" height="" /></a> */}
         </Col>
       </Row>
     </>

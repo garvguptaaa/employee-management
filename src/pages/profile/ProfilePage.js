@@ -56,7 +56,7 @@ function ProfilePage() {
                     </div>
                   </div>
 
-                  <div className="dropdown1">
+                  <div className="dropdown2">
                     <FaEllipsisH
                       onClick={toggleDropdown}
                       className="dropdown-icon"
@@ -75,7 +75,7 @@ function ProfilePage() {
               </div>
             </div>
           </div>
-          <div className="main-detail">
+          {/* <div className="main-detail">
             <nav className="navbar">
               <ul className="nav-links">
                 <li>
@@ -95,7 +95,7 @@ function ProfilePage() {
                 </li>
               </ul>
             </nav>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
