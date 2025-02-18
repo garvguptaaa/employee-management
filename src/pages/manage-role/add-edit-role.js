@@ -48,7 +48,7 @@ const AddEditRole = (props) => {
   };
 
   return (
-    <div className="user-container">
+    <div>
       <div className="header-class header-shadow">
         <div style={{ fontWeight: 'bold', fontSize: '25px' }} className="m-1">
           <span>MANAGE ROLES</span>

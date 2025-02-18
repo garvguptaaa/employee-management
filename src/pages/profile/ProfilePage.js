@@ -21,7 +21,7 @@ function ProfilePage() {
   };
   return (
     <>
-      <div className="user-container">
+      <div>
         <div className="profile">
           <div className="profile-content">
             <div className="profile-photo">

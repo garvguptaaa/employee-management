@@ -3,13 +3,6 @@
     background-color: rgb(5, 26, 41) ;
     height: 100vh;
 }
-.profile{
-    /* border: 2px solid rgb(151, 150, 150); */
-    height: 90vh;
-    margin-top: 25px;
-    margin-left: 25px;
-    width: 89vw;
-}
 .profile-content{
     padding: 17px 17px;
     background-color: var(--side-header-color,rgb(18, 77, 119));
@@ -42,7 +35,7 @@
     background-color: var(--side-header, rgb(11, 45, 70));
     padding: 10px 0;
     /* text-align: center; */
-    height: 25px;
+    height: 60px;
     width: 100%;
 
   }

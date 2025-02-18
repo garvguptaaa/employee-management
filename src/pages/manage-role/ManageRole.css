@@ -6,15 +6,6 @@ body {
   color: red;
   font-weight: bold;
 }
-.user-container {
-  display: flex;
-  align-items: center;
-  padding-left: 130px;
-  height: 20vh;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-}
 .user-shadow {
   box-shadow: 0 4px 8px grey, 0 6px 20px grey;
   height: 90vh;
