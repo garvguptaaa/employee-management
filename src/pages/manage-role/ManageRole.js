@@ -92,7 +92,7 @@ const ManageRole = (props) => {
                         </td>
                         <td>
                           <button
-                            onClick={() => navigate('/add-role/' + item.id)}
+                            onClick={() => navigate('/edit-role/' + item.id)}
                             className="btn btn-warning"
                           >
                             Edit

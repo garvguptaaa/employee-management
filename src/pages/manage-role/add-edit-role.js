@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Col,
   Row
 } from "reactstrap";
 import "./ManageRole.css";
-import { PostApi } from "../../services/ApiService";
+import { GetApi, PostApi } from "../../services/ApiService";
 import { toast } from "react-toastify";
 
 const AddEditRole = (props) => {
@@ -37,6 +37,7 @@ const AddEditRole = (props) => {
     },
 
   ];
+  let { id } = useParams();
   const navigate = useNavigate();
   const [MenuList, setMenuList] = useState(List);
   const {
@@ -46,8 +47,24 @@ const AddEditRole = (props) => {
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    if (id) {
+      getRoleDetail();
+    }
+  }, []);
+  const getRoleDetail = () => {
+    GetApi("/roles/" + id, {}).then((response) => {
+      reset(response);
+      if (response.role_access && response.role_access.length > 0) {
+        setMenuList(response.role_access);
+      }
+    }).catch((error) => {
+      toast.error("Something Went Wrong");
+    });
+  };
   const onSave = (data) => {
     var obj = {
+      id: id ?? null,
       name: data.name,
       role_access: MenuList
     }

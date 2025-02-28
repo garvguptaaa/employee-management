@@ -162,6 +162,7 @@ function SideBar(props) {
             <Route path="/manage-user" element={<ManageUser />} />
             <Route path="/manage-role" element={<ManageRole />} />
             <Route path="/add-role" element={<AddEditRole />} />
+            <Route path="/edit-role/:id" element={<AddEditRole />} />
             <Route path="/engage" index element={<Engage />} />
           </Routes>
         </div>
