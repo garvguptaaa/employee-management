@@ -6,7 +6,8 @@ import {
   Row
 } from "reactstrap";
 import "./ManageRole.css";
-import axios from "axios";
+import { PostApi } from "../../services/ApiService";
+import { toast } from "react-toastify";
 
 const AddEditRole = (props) => {
   const List = [
@@ -41,29 +42,27 @@ const AddEditRole = (props) => {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors },
   } = useForm();
+
   const onSave = (data) => {
     var obj = {
       name: data.name,
       role_access: MenuList
     }
-    console.log('obj', obj)
-    const baseURL = "http://localhost:8080/";
-    axios
-      .post(`${baseURL}roles`, obj)
-      .then((response) => {
-        if (data.id) {
-          console.log("Role update successfully", response);
-        } else {
-          console.log("Role added successfully", response);
-        }
-      })
-      .catch((error) => {
-        console.error("There was an error adding the user!", error);
-      });
+    PostApi("/roles", obj).then((response) => {
+      if (data.id) {
+        toast.success("Role update successfully");
+      } else {
+        toast.success("Role added successfully");
+      }
+      reset({});
+      navigate('/manage-role');
+    }).catch((error) => {
+      toast.error("Something Went Wrong");
+    });
   };
-
   return (
     <div>
       <div className="header-class header-shadow">

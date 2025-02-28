@@ -4,20 +4,39 @@ import {
   Col, Row
 } from "reactstrap";
 import "./ManageRole.css";
+import { useEffect, useState } from "react";
+import { DeleteApi, GetApi } from "../../services/ApiService";
+import { toast } from "react-toastify";
 
 const ManageRole = (props) => {
   const navigate = useNavigate();
+  const [data, setdata] = useState([]);
+
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
-  const handleLogin = (data) => {
-    localStorage.setItem('UserData', JSON.stringify(data));
-    props.onLogin()
-    navigate("/home");
-  };
 
+
+  useEffect(() => {
+    getroleList();
+  }, []);
+  const getroleList = () => {
+    GetApi("/roles/all/list", {}).then((response) => {
+      setdata(response);
+    }).catch((error) => {
+      toast.error("Something Went Wrong");
+    });
+  };
+  const deleteRole = (id) => {
+    DeleteApi("/roles/delete/" + id, data).then((response) => {
+      toast.success("User deleted successfully");
+      getroleList();
+    }).catch((error) => {
+      toast.error("Something Went Wrong");
+    });
+  };
   return (
     <div>
       <div className="header-class header-shadow">
@@ -63,14 +82,32 @@ const ManageRole = (props) => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>ALL PERMISSION</td>
-                  <td>
-                    <button className="btn btn-warning">Edit</button>
-                    <button className="btn btn-danger" style={{ marginLeft: '10px' }}>Delete</button>
-                  </td>
-                </tr>
+                {data &&
+                  data.map((item, index) => {
+                    return (
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>
+                          {item.name}
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => navigate('/add-role/' + item.id)}
+                            className="btn btn-warning"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => deleteRole(item.id)}
+                            style={{ marginLeft: "10px" }}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 {/* Add more rows as needed */}
               </tbody>
             </table>
