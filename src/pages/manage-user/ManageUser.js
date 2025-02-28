@@ -1,4 +1,5 @@
 import axios from "axios";
+import { DeleteApi, GetApi, PostApi } from "../../services/ApiService";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +11,7 @@ import {
   Row,
 } from "reactstrap";
 import "./ManageUser.css";
+import { toast } from "react-toastify";
 
 const ManageUser = (props) => {
   const navigate = useNavigate();
@@ -28,60 +30,42 @@ const ManageUser = (props) => {
   useEffect(() => {
     getUserList();
   }, []);
-  const getUserList = async () => {
-    const baseURL = "http://localhost:8080/";
-    axios
-      .get(`${baseURL}users/list`, {})
-      .then((response) => {
-        setdata(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error adding the user!", error);
-      });
+  const getUserList = () => {
+    GetApi("/users/list", {}).then((response) => {
+      setdata(response);
+    }).catch((error) => {
+      toast.error("Something Went Wrong");
+    });
   };
   const onSave = (data) => {
-    const baseURL = "http://localhost:8080/";
-    axios
-      .post(`${baseURL}users`, data)
-      .then((response) => {
-        if (data.id) {
-          console.log("User update successfully", response);
-        } else {
-          console.log("User added successfully", response);
-        }
-        setIsOpen(false);
-        reset({});
-        getUserList();
-        // navigate("/manage-user"); // Navigate to user list or any other page
-      })
-      .catch((error) => {
-        console.error("There was an error adding the user!", error);
-      });
+    PostApi("/users", data).then((response) => {
+      if (data.id) {
+        toast.success("User update successfully");
+      } else {
+        toast.success("User added successfully");
+      }
+      setIsOpen(false);
+      reset({});
+      getUserList();
+    }).catch((error) => {
+      toast.error("Something Went Wrong");
+    });
   };
   const deleteUser = (id) => {
-    const baseURL = "http://localhost:8080/";
-    axios
-      .delete(`${baseURL}users/${id}`)
-      .then((response) => {
-        console.log("User deleted successfully", response);
-        getUserList();
-        // navigate("/manage-user"); // Navigate to user list or any other page
-      })
-      .catch((error) => {
-        console.error("There was an error adding the user!", error);
-      });
+    DeleteApi("/users/" + id, data).then((response) => {
+      toast.success("User deleted successfully");
+      getUserList();
+    }).catch((error) => {
+      toast.error("Something Went Wrong");
+    });
   };
   const openUserPopUpForUpdate = (id) => {
-    const baseURL = "http://localhost:8080/";
-    axios
-      .get(`${baseURL}users/${id}`)
-      .then((response) => {
-        setIsOpen(true);
-        reset(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error adding the user!", error);
-      });
+    GetApi("/users/" + id, data).then((response) => {
+      setIsOpen(true);
+      reset(response);
+    }).catch((error) => {
+      toast.error("Something Went Wrong");
+    });
   };
 
   return (
@@ -174,11 +158,11 @@ const ManageUser = (props) => {
 
       <Offcanvas
         direction="end"
-        toggle={function noRefCheck() {}}
+        toggle={function noRefCheck() { }}
         isOpen={isOpen}
       >
         <OffcanvasHeader
-          toggle={function noRefCheck() {}}
+          toggle={function noRefCheck() { }}
           onClick={() => {
             reset({});
             setIsOpen(false);
