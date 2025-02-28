@@ -6,28 +6,29 @@ import {
   Row
 } from "reactstrap";
 import "./ManageRole.css";
+import axios from "axios";
 
 const AddEditRole = (props) => {
   const List = [
     {
-      name: 'Dashboard',
-      code: 'dashboard',
+      menu: 'Dashboard',
+      menu_code: 'dashboard',
       is_view: false,
       is_add: null,
       is_edit: null,
       is_delete: null
     },
     {
-      name: 'Manage User',
-      code: 'manage-user',
+      menu: 'Manage User',
+      menu_code: 'manage-user',
       is_view: false,
       is_add: true,
       is_edit: false,
       is_delete: false
     },
     {
-      name: 'Manage Role',
-      code: 'manage-role',
+      menu: 'Manage Role',
+      menu_code: 'manage-role',
       is_view: false,
       is_add: false,
       is_edit: false,
@@ -43,8 +44,24 @@ const AddEditRole = (props) => {
     formState: { errors },
   } = useForm();
   const onSave = (data) => {
-    console.log('data', data)
-    console.log('MenuList', MenuList)
+    var obj = {
+      name: data.name,
+      role_access: MenuList
+    }
+    console.log('obj', obj)
+    const baseURL = "http://localhost:8080/";
+    axios
+      .post(`${baseURL}roles`, obj)
+      .then((response) => {
+        if (data.id) {
+          console.log("Role update successfully", response);
+        } else {
+          console.log("Role added successfully", response);
+        }
+      })
+      .catch((error) => {
+        console.error("There was an error adding the user!", error);
+      });
   };
 
   return (
@@ -98,7 +115,7 @@ const AddEditRole = (props) => {
                     MenuList && MenuList.map((item, index) => {
                       return (
                         <tr key={index}>
-                          <td>{item.name}</td>
+                          <td>{item.menu}</td>
                           <td>
                             {
                               item.is_view != null ? <input type="checkbox" checked={item.is_view} onChange={(e) => {
