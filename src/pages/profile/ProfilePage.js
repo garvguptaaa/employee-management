@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import {
   FaEllipsisH,
   FaEnvelope,
@@ -9,9 +9,14 @@ import {
 import { Link } from "react-router-dom";
 import profileImage from "../../assets/ProfilePhoto.png";
 import "./ProfilePage.css";
+import { get } from "react-hook-form";
+import HelperService from "../../services/HelperService";
+import { GetApi } from "../../services/ApiService";
+import { toast } from "react-toastify";
 
 function ProfilePage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [UserData, setUserData] = useState("");
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -19,6 +24,17 @@ function ProfilePage() {
   const handleLinkClick = () => {
     setIsDropdownOpen(false);
   };
+  useEffect(() => {
+    getUserDetails();
+  }, []);
+  const getUserDetails = () => {
+    const id = HelperService.getLoginUserData('id');
+    GetApi("/users/" + id, {}).then((response) => {
+      setUserData(response);
+    }).catch((error) => {
+      toast.error("Something Went Wrong");
+    });
+  }
   return (
     <>
       <div>
@@ -27,47 +43,33 @@ function ProfilePage() {
             <div className="profile-photo">
               <img src={profileImage} alt="Profile" className="profile-img" />
               <div className="profile-detail">
-                <div className="name">Garv Gupta</div>
+                <div className="name">{UserData?.first_name} {UserData?.last_name}</div>
                 <div className="personal-info">
                   <div className="profile-info">
                     <div className="info-item">
                       <label>
                         <FaUserTag />
                       </label>
-                      <span>Software Engineer</span>
+                      <span>{UserData?.position}</span>
                     </div>
                     <div className="info-item">
                       <label>
                         <FaEnvelope />
                       </label>
-                      <span>garv@example.com</span>
+                      <span>{UserData?.email}</span>
                     </div>
                     <div className="info-item">
                       <label>
                         <FaPhoneAlt />
                       </label>
-                      <span>+91 6265896291</span>
+                      <span>+91 {UserData?.mobile}</span>
                     </div>
                     <div className="info-item">
                       <label>
                         <FaMapMarkerAlt />
                       </label>
-                      <span>Indore, INDIA</span>
+                      <span>{UserData?.address}</span>
                     </div>
-                  </div>
-
-                  <div className="dropdown2">
-                    <FaEllipsisH
-                      onClick={toggleDropdown}
-                      className="dropdown-icon"
-                    />
-                    {isDropdownOpen && (
-                      <div className="dropdown-menu">
-                        <Link to="/profile" onClick={handleLinkClick}>
-                          View ID Card
-                        </Link>
-                      </div>
-                    )}
                   </div>
                 </div>
                 <hr />

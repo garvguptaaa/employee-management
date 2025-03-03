@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 import { PostApi } from "../../services/ApiService";
 import { toast } from "react-toastify";
+import HelperService from "../../services/HelperService";
 
 const LoginPage = (props) => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const LoginPage = (props) => {
     PostApi("/users/login", data).then((response) => {
       toast.success("Login successfully");
       localStorage.setItem('UserData', JSON.stringify(response)); 
+      console.log('object', HelperService.getLoginUserData('mobile'))
       props.onLogin()
       navigate("/home");
     }).catch((error) => {

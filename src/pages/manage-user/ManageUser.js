@@ -138,7 +138,7 @@ const ManageUser = (props) => {
                           {item.first_name} {item.last_name}
                         </td>
                         <td>{item.email}</td>
-                        <td>Admin</td>
+                        <td>User</td>
                         <td>
                           <button
                             onClick={() => openUserPopUpForUpdate(item.id)}
@@ -250,6 +250,40 @@ const ManageUser = (props) => {
                   {errors.mobile && (
                     <span className="text-danger fs-12">
                       Please Enter Mobile.
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="input-group">
+                <textarea
+                  className="input-group"
+                  autoComplete="off"
+                  placeholder="Address"
+                  {...register("address", {
+                    required: true,
+                  })}
+                />
+                <div>
+                  {errors.mobile && (
+                    <span className="text-danger fs-12">
+                      Please Enter Address.
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="input-group">
+                <input
+                  type="text"
+                  autoComplete="off"
+                  placeholder="Designation"
+                  {...register("position", {
+                    required: true,
+                  })}
+                />
+                <div>
+                  {errors.mobile && (
+                    <span className="text-danger fs-12">
+                      Please Enter Designation.
                     </span>
                   )}
                 </div>

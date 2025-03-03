@@ -35,6 +35,14 @@ const AddEditRole = (props) => {
       is_edit: false,
       is_delete: true
     },
+    {
+      menu: 'Enagage',
+      menu_code: 'engage',
+      is_view: false,
+      is_add: false,
+      is_edit: false,
+      is_delete: true
+    },
 
   ];
   let { id } = useParams();
