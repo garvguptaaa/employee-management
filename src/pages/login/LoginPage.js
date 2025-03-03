@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginPage.css";
+import { PostApi } from "../../services/ApiService";
+import { toast } from "react-toastify";
 
 const LoginPage = (props) => {
   const navigate = useNavigate();
@@ -10,12 +12,16 @@ const LoginPage = (props) => {
     register,
     formState: { errors },
   } = useForm();
-  console.log('errors',errors)
+  console.log('errors', errors)
   const handleLogin = (data) => {
-    localStorage.setItem('UserData',JSON.stringify(data));
-    props.onLogin()
-    
-    navigate("/home");
+    PostApi("/users/login", data).then((response) => {
+      toast.success("Login successfully");
+      localStorage.setItem('UserData', JSON.stringify(data)); 
+      props.onLogin()
+      navigate("/home");
+    }).catch((error) => {
+      toast.error("Something Went Wrong");
+    });
   };
 
   return (
