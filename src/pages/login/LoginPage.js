@@ -16,7 +16,7 @@ const LoginPage = (props) => {
   const handleLogin = (data) => {
     PostApi("/users/login", data).then((response) => {
       toast.success("Login successfully");
-      localStorage.setItem('UserData', JSON.stringify(data)); 
+      localStorage.setItem('UserData', JSON.stringify(response)); 
       props.onLogin()
       navigate("/home");
     }).catch((error) => {
