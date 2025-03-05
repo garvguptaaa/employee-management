@@ -28,7 +28,7 @@ function SalarySlipsForm() {
 
   const getUserList = () => {
     GetApi("/users", {}).then((response) => {
-      setUserList(response?.data);
+      setUserList(response);
     }).catch((error) => {
       toast.error("Something Went Wrong");
     });
