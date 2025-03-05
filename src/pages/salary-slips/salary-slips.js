@@ -8,13 +8,17 @@ import {
   OffcanvasHeader,
   Row,
 } from "reactstrap";
+import HelperService from '../../services/HelperService';
 
 function SalarySlips(props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [data, setdata] = useState('');
   const contentRef = useRef(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
   useEffect(() => {
     setIsOpen(props?.showModel);
+    console.log('props?.ModelData', props?.ModelData)
+    setdata(props?.ModelData);
   }, []);
   return (
     <>
@@ -22,7 +26,7 @@ function SalarySlips(props) {
         direction="end"
         toggle={function noRefCheck() { }}
         isOpen={isOpen}
-        style={{ width: '80%' }}
+        style={{ width: '90%' }}
       >
         <OffcanvasHeader
           toggle={function noRefCheck() { }}
@@ -39,27 +43,24 @@ function SalarySlips(props) {
                 <div className='new'>
                   <h3 className='newcenter'>Salary Slip</h3>
                 </div>
-                <tr>
+                <tr style={{ height: '70px' }}>
                   <th>Name</th>
-                  <td>Example</td>
+                  <td>{data?.first_name} {data?.last_name}</td>
                   <th>Employee Code</th>
-                  <td>XXXXXXXXXXX</td>
+                  <td>{data?.id}</td>
                   <th>Mobile</th>
-                  <td>XXXXXXXXXXX</td>
+                  <td>{data?.mobile}</td>
+                 
+                </tr>
+                <tr className="myBackground" style={{ height: '70px' }}>
                   <th>Email</th>
-                  <td>XXXXXXXXXXX</td>
-                </tr>
-                <tr className="myBackground">
+                  <td>{data?.email}</td>
                   <th>Month Days</th>
-                  <td>31</td>
+                  <td>{data?.total_day}</td>
                   <th>Days Present</th>
-                  <td>28</td>
-                  <th>LWP/Absent</th>
-                  <td>0</td>
-                  <th>Privilege Leave</th>
-                  <td>2</td>
+                  <td>{data?.total_day_present}</td>
                 </tr>
-                <tr className="myBackground">
+                <tr className="myBackground" >
                   <th colspan="2">Payments</th>
                   <th>Particular</th>
                   <th className="table-border-right">Amount (Rs.)</th>
@@ -70,45 +71,39 @@ function SalarySlips(props) {
                 <tr>
                   <th colspan="2">Statuory Bonus</th>
                   <td></td>
-                  <td className="myAlign">4935.00</td>
+                  <td className="myAlign">{parseInt(data?.statuory_bonus)?.toFixed(2)}</td>
                   <th colspan="2">Provident Fund</th>
                   <td></td>
-                  <td className="myAlign">00.00</td>
+                  <td className="myAlign">{parseInt(data?.pf)?.toFixed(2) ?? 0}</td>
                 </tr>
                 <tr>
                   <th colspan="2">Special Allowance</th>
                   <td></td>
-                  <td className="myAlign">00.00</td>
+                  <td className="myAlign">{parseInt(data?.special_allowance)?.toFixed(2)}</td>
                   <th colspan="2">Professional Tax</th>
                   <td></td>
-                  <td className="myAlign">00.00</td>
+                  <td className="myAlign">{parseInt(data?.professional_tax_deduction)?.toFixed(2)}</td>
                 </tr>
                 <tr>
                   <th colspan="2">House Rent Allowance</th>
                   <td></td>
-                  <td className="myAlign">00.00</td>
-                  <th colspan="2">Loan</th>
-                  <td></td>
-                  <td className="myAlign">00.00</td>
+                  <td className="myAlign">{parseInt(data?.hra)?.toFixed(2)}</td>
                 </tr>
                 <tr>
                   <th colspan="2">Medical Allowance</th>
                   <td></td>
-                  <td className="myAlign">00.00</td>
-                  <th colspan="2">Income Tax</th>
-                  <td></td>
-                  <td className="myAlign">00.00</td>
+                  <td className="myAlign">{parseInt(data?.medical_allowance)?.toFixed(2)}</td>
                 </tr>
                 <tr>
                   <th colspan="2">Basic Salary</th>
                   <td></td>
-                  <td className="myAlign">00.00</td>
+                  <td className="myAlign">{parseInt(data?.basic_salary)?.toFixed(2)}</td>
                 </tr>
                 <tr className="myBackground">
                   <th colspan="3">Total Payments</th>
-                  <td className="myAlign">10000</td>
+                  <td className="myAlign">{parseInt(data?.total_earning)?.toFixed(2)}</td>
                   <th colspan="3">Total Deductions</th>
-                  <td className="myAlign">1000</td>
+                  <td className="myAlign">{parseInt(data?.total_deduction)?.toFixed(2)}</td>
                 </tr>
                 <tr height="40px">
                   <th colspan="2"></th>
@@ -116,11 +111,11 @@ function SalarySlips(props) {
                   <td className="table-border-right"></td>
                   <th colspan="2" className="table-border-bottom">Net Salary</th>
                   <td></td>
-                  <td>52690.00</td>
+                  <td>{parseInt(data?.net_salary)?.toFixed(2)}</td>
                 </tr>
 
                 <tr className="myBackground">
-                  <th colspan="7">RUPEES : FIFTY THOUSAND SIX HUNDRED NINETY ONLY</th>
+                  <th colspan="7">RUPEES : {HelperService.getAmountInWord(data?.net_salary)}</th>
                 </tr>
                 <div className='new'  >
                   <h3 className='newcenter' style={{ fontSize: '16px' }}>This is computer generated salary slip. Hence no signature is required</h3>
@@ -128,9 +123,13 @@ function SalarySlips(props) {
               </table>
             </div>
             <hr />
-            <button onClick={() => reactToPrintFn()} className="login-btn">
-              Print
-            </button>
+          <div style={{justifyContent: 'center', display: 'flex'}}>
+              <Col lg={2}>
+                <button onClick={() => reactToPrintFn()} className="login-btn">
+                  Print
+                </button>
+              </Col>
+          </div>
           </strong>
         </OffcanvasBody>
       </Offcanvas>

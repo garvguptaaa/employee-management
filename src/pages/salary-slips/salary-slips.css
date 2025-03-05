@@ -3,7 +3,7 @@
   justify-content: center;
   display: flex;
   .empDetail {
-    width: 80%;
+    width: 90%;
     text-align: left;
     border: 2px solid black;
     border-collapse: collapse;
@@ -86,7 +86,7 @@
   background-color: #9b9b9b;
   height: 107px;
   align-content: center;
-  width: 806%;
+  width: 802%;
 }
 .newcenter {
  justify-content: center;
