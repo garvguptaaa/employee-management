@@ -46,24 +46,26 @@ function SalarySlipsForm() {
               <span>Make Salary Slip</span>
             </div>
             <form onSubmit={handleSubmit(onSave)} style={{ padding: "30px" }}>
-              <Row><Col lg={3}>
-                <div className="input-group">
-                  <input
-                    type="text"
-                    autoComplete="off"
-                    placeholder="First Name"
-                    {...register("first_name", {
-                      required: false,
-                    })}
-                  />
-                  <div>
-                    {errors.first_name && (
-                      <span className="text-danger fs-12">
-                        Please Enter First Name.
-                      </span>
-                    )}
+              <Row>
+                <Col lg={3}>
+                  <div className="input-group">
+                    <input
+                      type="text"
+                      autoComplete="off"
+                      placeholder="First Name"
+                      {...register("first_name", {
+                        required: false,
+                      })}
+                    />
+                    <div>
+                      {errors.first_name && (
+                        <span className="text-danger fs-12">
+                          Please Enter First Name.
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </div></Col>
+                </Col>
                 <Col lg={3}>
                   <div className="input-group">
                     <input
@@ -81,105 +83,117 @@ function SalarySlipsForm() {
                         </span>
                       )}
                     </div>
-                  </div></Col>
-                <Col lg={3}>  <div className="input-group">
-                  <input
-                    type="text"
-                    autoComplete="off"
-                    placeholder="Email"
-                    {...register("email", {
-                      required: false,
-                      pattern: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
-                    })}
-                  />
-                  <div>
-                    {errors.email && (
-                      <span className="text-danger fs-12">
-                        {errors.email.type == "pattern"
-                          ? "Please Enter Valid Email"
-                          : "Please Enter Email"}
-                      </span>
-                    )}
                   </div>
-                </div></Col>
-                <Col lg={3}>  <div className="input-group">
-                  <input
-                    type="text"
-                    autoComplete="off"
-                    placeholder="Mobile Number"
-                    {...register("mobile", {
-                      required: false,
-                    })}
-                  />
-                  <div>
-                    {errors.mobile && (
-                      <span className="text-danger fs-12">
-                        Please Enter Mobile.
-                      </span>
-                    )}
-                  </div>
-                </div></Col>
-                <Col lg={3}>   <div className="input-group">
-                  <textarea
-                    className="input-group"
-                    autoComplete="off"
-                    placeholder="Address"
-                    {...register("address", {
-                      required: false,
-                    })}
-                  />
-                  <div>
-                    {errors.mobile && (
-                      <span className="text-danger fs-12">
-                        Please Enter Address.
-                      </span>
-                    )}
-                  </div>
-                </div></Col>
-                <Col lg={3}>    <div className="input-group">
-                  <input
-                    type="text"
-                    autoComplete="off"
-                    placeholder="Designation"
-                    {...register("position", {
-                      required: false,
-                    })}
-                  />
-                  <div>
-                    {errors.mobile && (
-                      <span className="text-danger fs-12">
-                        Please Enter Designation.
-                      </span>
-                    )}
-                  </div>
-                </div></Col>
-                <Col lg={3}>  <div>
-                  <select
-                    className="select-control"
-                    {...register("role_id", {
-                      required: false,
-                    })}
-                  >
-                    <option value="">Select Role</option>
-                    {userList &&
-                      userList.map((item, index) => {
-                        return (
-                          <option key={index} value={item.id}>
-                            {item.first_name} {item.last_name}
-                          </option>
-                        );
-                      }
-
+                </Col>
+                <Col lg={3}>
+                  <div className="input-group">
+                    <input
+                      type="text"
+                      autoComplete="off"
+                      placeholder="Email"
+                      {...register("email", {
+                        required: false,
+                        pattern: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+                      })}
+                    />
+                    <div>
+                      {errors.email && (
+                        <span className="text-danger fs-12">
+                          {errors.email.type == "pattern"
+                            ? "Please Enter Valid Email"
+                            : "Please Enter Email"}
+                        </span>
                       )}
-                  </select>
-                  <div>
-                    {errors.role_id && (
-                      <span className="text-danger fs-12">
-                        Please Select Role.
-                      </span>
-                    )}
+                    </div>
                   </div>
-                </div></Col ></Row>
+                </Col>
+                <Col lg={3}>
+                  <div className="input-group">
+                    <input
+                      type="text"
+                      autoComplete="off"
+                      placeholder="Mobile Number"
+                      {...register("mobile", {
+                        required: false,
+                      })}
+                    />
+                    <div>
+                      {errors.mobile && (
+                        <span className="text-danger fs-12">
+                          Please Enter Mobile.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </Col>
+                <Col lg={3}>
+                  <div className="input-group">
+                    <textarea
+                      className="input-group"
+                      autoComplete="off"
+                      placeholder="Address"
+                      {...register("address", {
+                        required: false,
+                      })}
+                    />
+                    <div>
+                      {errors.mobile && (
+                        <span className="text-danger fs-12">
+                          Please Enter Address.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </Col>
+                <Col lg={3}>
+                  <div className="input-group">
+                    <input
+                      type="text"
+                      autoComplete="off"
+                      placeholder="Designation"
+                      {...register("position", {
+                        required: false,
+                      })}
+                    />
+                    <div>
+                      {errors.mobile && (
+                        <span className="text-danger fs-12">
+                          Please Enter Designation.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </Col>
+                <Col lg={3}>
+                  <div>
+                    <select
+                      className="select-control"
+                      {...register("role_id", {
+                        required: false,
+                      })}
+                    >
+                      <option value="">Select Role</option>
+                      {userList &&
+                        userList.map((item, index) => {
+                          return (
+                            <option key={index} value={item.id}>
+                              {item.first_name} {item.last_name}
+                            </option>
+                          );
+                        }
+
+                        )}
+                    </select>
+                    <div>
+                      {errors.role_id && (
+                        <span className="text-danger fs-12">
+                          Please Select Role.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </Col>
+              </Row>
               <hr />
               <div style={{ justifyContent: "center", display: "flex" }}>
                 <Col lg={1}>
