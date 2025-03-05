@@ -22,6 +22,8 @@ import Engage from "../../pages/engage/engage";
 import HelperService from "../../services/HelperService";
 import { GetApi } from "../../services/ApiService";
 import { toast } from "react-toastify";
+import SalarySlips from "../../pages/salary-slips/salary-slips";
+import SalarySlipsForm from "../../pages/salary-slips/salary-slips-form";
 
 function SideBar(props) {
   const navigate = useNavigate();
@@ -142,7 +144,14 @@ function SideBar(props) {
                       <div className="side-icon-name">Manage Role</div>
                     </Link>
                   </li>
-
+                  <li>
+                    <Link to="/salary-slips">
+                      <div className="side-icon">
+                        <FaInbox size={17} color="white" />
+                      </div>
+                      <div className="side-icon-name">Salary Slips</div>
+                    </Link>
+                  </li>
                   {/* <li>
                   <Link to="/myFinances">
                     <div className="side-icon">
@@ -238,6 +247,7 @@ function SideBar(props) {
             <Route path="/add-role" element={<AddEditRole />} />
             <Route path="/edit-role/:id" element={<AddEditRole />} />
             <Route path="/engage" index element={<Engage />} />
+            <Route path="/salary-slips" index element={<SalarySlipsForm />} />
           </Routes>
         </div>
       </div>
