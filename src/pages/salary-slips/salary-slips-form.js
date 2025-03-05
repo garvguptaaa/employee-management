@@ -49,18 +49,22 @@ function SalarySlipsForm() {
               <Row>
                 <Col lg={3}>
                   <div className="input-group">
+                    <label className="font-bold">Salary</label>
                     <input
                       type="text"
                       autoComplete="off"
-                      placeholder="First Name"
-                      {...register("first_name", {
+                      placeholder="Salary"
+                      {...register("salary", {
                         required: false,
+                        pattern: /^[0-9]*\.?[0-9]*$/,
                       })}
                     />
                     <div>
-                      {errors.first_name && (
+                      {errors.salary && (
                         <span className="text-danger fs-12">
-                          Please Enter First Name.
+                          {errors.salary.type == "pattern"
+                            ? "Please Enter Valid Salary"
+                            : "Please Enter Salary"}
                         </span>
                       )}
                     </div>
@@ -68,126 +72,22 @@ function SalarySlipsForm() {
                 </Col>
                 <Col lg={3}>
                   <div className="input-group">
+                    <label className="font-bold">HRA</label>
                     <input
                       type="text"
                       autoComplete="off"
-                      placeholder="Last Name"
-                      {...register("last_name", {
+                      placeholder="HRA"
+                      {...register("hra", {
                         required: false,
+                        pattern: /^[0-9]*$/,
                       })}
                     />
                     <div>
-                      {errors.last_name && (
+                      {errors.hra && (
                         <span className="text-danger fs-12">
-                          Please Enter last Name.
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Col>
-                <Col lg={3}>
-                  <div className="input-group">
-                    <input
-                      type="text"
-                      autoComplete="off"
-                      placeholder="Email"
-                      {...register("email", {
-                        required: false,
-                        pattern: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
-                      })}
-                    />
-                    <div>
-                      {errors.email && (
-                        <span className="text-danger fs-12">
-                          {errors.email.type == "pattern"
-                            ? "Please Enter Valid Email"
-                            : "Please Enter Email"}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Col>
-                <Col lg={3}>
-                  <div className="input-group">
-                    <input
-                      type="text"
-                      autoComplete="off"
-                      placeholder="Mobile Number"
-                      {...register("mobile", {
-                        required: false,
-                      })}
-                    />
-                    <div>
-                      {errors.mobile && (
-                        <span className="text-danger fs-12">
-                          Please Enter Mobile.
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Col>
-                <Col lg={3}>
-                  <div className="input-group">
-                    <textarea
-                      className="input-group"
-                      autoComplete="off"
-                      placeholder="Address"
-                      {...register("address", {
-                        required: false,
-                      })}
-                    />
-                    <div>
-                      {errors.mobile && (
-                        <span className="text-danger fs-12">
-                          Please Enter Address.
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Col>
-                <Col lg={3}>
-                  <div className="input-group">
-                    <input
-                      type="text"
-                      autoComplete="off"
-                      placeholder="Designation"
-                      {...register("position", {
-                        required: false,
-                      })}
-                    />
-                    <div>
-                      {errors.mobile && (
-                        <span className="text-danger fs-12">
-                          Please Enter Designation.
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Col>
-                <Col lg={3}>
-                  <div>
-                    <select
-                      className="select-control"
-                      {...register("role_id", {
-                        required: false,
-                      })}
-                    >
-                      <option value="">Select Role</option>
-                      {userList &&
-                        userList.map((item, index) => {
-                          return (
-                            <option key={index} value={item.id}>
-                              {item.first_name} {item.last_name}
-                            </option>
-                          );
-                        }
-
-                        )}
-                    </select>
-                    <div>
-                      {errors.role_id && (
-                        <span className="text-danger fs-12">
-                          Please Select Role.
+                          {errors.hra.type == "pattern"
+                            ? "Please Enter Valid HRA"
+                            : "Please Enter HRA"}
                         </span>
                       )}
                     </div>
