@@ -1,25 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./engage.css";
 import { Col, Row } from 'reactstrap';
+import { GetApi } from '../../services/ApiService';
+import { toast } from 'react-toastify';
+import profileImage from "../../assets/ProfilePhoto.png";
 
 function Engage() {
+  const [data, setdata] = useState([]);
+  useEffect(() => {
+    getUserList();
+  }, []);
+  const getUserList = () => {
+    GetApi("/users/list", {}).then((response) => {
+      setdata(response);
+    }).catch((error) => {
+      toast.error("Something Went Wrong");
+    });
+  };
   return (
     <>
       <Row>
         <Col lg={3}>
           <title>WhatsApp</title>
           <div id="sidebar-header">
-            <img decoding="async" src="https://picsum.photos/id/10/50" alt="" class="avatar" id="profile-image" />
+            {/* <img decoding="async" src="https://picsum.photos/id/10/50" alt="" class="avatar" id="profile-image" /> */}
             <div class="toolbar">
               <img decoding="async" src="icons/communities.svg" alt="" class="icon" />
               <img decoding="async" src="icons/status.svg" alt="" class="icon" />
               <img decoding="async" src="icons/new-chat.svg" alt="" class="icon" />
-            
+
             </div>
           </div> {/* Closing div for sidebar-header */}
-          <img decoding="async" src="icons/filter.svg" alt="" class="icon" />
+          {/* <img decoding="async" src="icons/filter.svg" alt="" class="icon" /> */}
 
-          <div class="connectivity-notification">
+          {/* <div class="connectivity-notification">
             <img decoding="async" src="icons/warning.svg" alt="Offline warning" />
             <div>
               <div class="connectivity-notification-title">
@@ -29,10 +43,10 @@ function Engage() {
                 Make sure your computer has an active Internet connection
               </span>
             </div>
-          </div>
+          </div> */}
           <section id="sidebar-contents">
             <div id="chats-list">
-              <div class="chat-tile">
+              {/* <div class="chat-tile">
                 <img decoding="async" src="https://picsum.photos/id/103/50" alt="" class="chat-tile-avatar" />
                 <div class="chat-tile-details">
                   <div class="chat-tile-title">
@@ -46,8 +60,8 @@ function Engage() {
                     </span>
                   </div>
                 </div>
-              </div>
-              <div class="chat-tile">
+              </div> */}
+              {/* <div class="chat-tile">
                 <img decoding="async" src="https://picsum.photos/id/104/50" alt="" class="chat-tile-avatar" />
                 <div class="chat-tile-details">
                   <div class="chat-tile-title">
@@ -61,37 +75,29 @@ function Engage() {
                     </span>
                   </div>
                 </div>
-              </div>
-              <div class="chat-tile">
-                <img decoding="async" src="https://picsum.photos/id/106/50" alt="" class="chat-tile-avatar" />
-                <div class="chat-tile-details">
-                  <div class="chat-tile-title">
-                    <span>Amor 💖</span>
-                    <span>Saturday</span>
-                  </div>
-                  <div class="chat-tile-subtitle">
-                    <span>You do not understand what I'm </span>
-                    <span class="chat-tile-menu">
-                      <img decoding="async" src="icons/pin.svg" alt="" class="pin" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="chat-tile">
-                <img decoding="async" src="https://picsum.photos/id/110/50" alt="" class="chat-tile-avatar" />
-                <div class="chat-tile-details">
-                  <div class="chat-tile-title">
-                    <span>John</span>
-                    <span>Saturday</span>
-                  </div>
-                  <div class="chat-tile-subtitle">
-                    <span>Reply in group fast</span>
-                    <span class="chat-tile-menu">
-                      <img decoding="async" src="icons/pin.svg" alt="" class="pin" />
-                    </span>
-                  </div>
-                </div>
-              </div>
+              </div> */}
+              {data &&
+                data.map((item, index) => {
+                  return (
+                    <div class="chat-tile">
+                      <img src={profileImage} alt="Profile" class="chat-tile-avatar" height={50} width={50} />
+                      <div class="chat-tile-details">
+                        <div class="chat-tile-title">
+                          <span>{item.first_name} {item.last_name} 💖</span>
+                          {/* <span>Saturday</span> */}
+                        </div>
+                        {/* <div class="chat-tile-subtitle">
+                          <span>You do not understand what I'm </span>
+                          <span class="chat-tile-menu">
+                            <img decoding="async" src="icons/pin.svg" alt="" class="pin" />
+                          </span>
+                        </div> */}
+                      </div>
+                    </div>
+                  )
+                })}
+
+
 
 
             </div>
@@ -106,7 +112,7 @@ function Engage() {
                 <div class="info">You and 69 others</div>
               </div>
               <img decoding="async" src="icons/search.svg" alt="" class="icon" />
-              
+
             </div>
           </div>
           <div id="chat-window-contents">
