@@ -11,6 +11,7 @@ function Engage() {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors },
   } = useForm();
   const [data, setdata] = useState([]);
@@ -47,6 +48,9 @@ function Engage() {
     obj.from_id = HelperService.getLoginUserData('id');
     obj.to_id = chatData.id;
     PostApi("/chat", obj).then((response) => {
+      toast.success("Message Sent Successfully");
+      chatWithUser(chatData);
+      reset();
     }).catch((error) => {
       toast.error("Something Went Wrong");
     });
@@ -152,7 +156,7 @@ function Engage() {
 
                 </div>
               </div>
-              <div>
+              <div style={{ height: '75vh', overflowY: 'scroll' }}>
                 {
                   chatList && chatList.length > 0 && chatList.map((item, index) => {
                     return (
@@ -171,7 +175,8 @@ function Engage() {
                   })
                 }
               </div>
-              <div style={{ marginTop: '250px' }}>
+              <hr/>
+              <div style={{ top: '-130px', position: 'relative' ,background :'black',height:'140px'}}>
                 <form onSubmit={handleSubmit(onSendMessage)}>
                   <div className="input-group">
                     <input
