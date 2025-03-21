@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 // import Logo from "../assets/images/logo.jpg";
 import profileImage from "../../assets/ProfilePhoto.png";
 
 import {
-  FaBuilding,
   FaComments,
   FaHome,
   FaInbox,
-  FaMoneyBillWave,
-  FaUser,
-  FaUsers,
+  FaUser
 } from "react-icons/fa";
-import "./SideBar.css";
+import { toast } from "react-toastify";
+import Engage from "../../pages/engage/engage";
 import Home from "../../pages/home/Home";
-import ProfilePage from "../../pages/profile/ProfilePage";
-import ManageUser from "../../pages/manage-user/ManageUser";
 import ManageRole from "../../pages/manage-role/ManageRole";
 import AddEditRole from "../../pages/manage-role/add-edit-role";
-import Engage from "../../pages/engage/engage";
-import HelperService from "../../services/HelperService";
-import { GetApi } from "../../services/ApiService";
-import { toast } from "react-toastify";
-import SalarySlips from "../../pages/salary-slips/salary-slips";
+import ManageUser from "../../pages/manage-user/ManageUser";
+import ProfilePage from "../../pages/profile/ProfilePage";
 import SalarySlipsForm from "../../pages/salary-slips/salary-slips-form";
+import { GetApi } from "../../services/ApiService";
+import HelperService from "../../services/HelperService";
+import "./SideBar.css";
 
 function SideBar(props) {
   const navigate = useNavigate();
@@ -89,7 +85,7 @@ function SideBar(props) {
                   >
                     My Profile
                   </Link>
-                  <a onClick={Logout}>Logout</a>
+                  <Link onClick={Logout}>Logout</Link>
                   <div className="theme-container">
                     <form>
                       <input

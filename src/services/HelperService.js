@@ -9,7 +9,7 @@ const HelperService = {
     const tens = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
     const thousands = ["", "Thousand", "Million", "Billion"];
 
-    if (key == 0) return "Zero";
+    if (key === 0) return "Zero";
 
     let word = '';
     let num = parseInt(key);
