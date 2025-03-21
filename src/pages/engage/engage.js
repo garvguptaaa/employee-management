@@ -175,8 +175,8 @@ function Engage() {
                   })
                 }
               </div>
-              <hr/>
-              <div style={{ top: '-130px', position: 'relative' ,background :'black',height:'140px'}}>
+              <hr style={{marginTop:'20px',marginBottom:'20px'}}/>
+              <div style={{ top: '-120px', position: 'relative' ,background :'black',height:'140px'}}>
                 <form onSubmit={handleSubmit(onSendMessage)}>
                   <div className="input-group">
                     <input
