@@ -24,6 +24,7 @@ function Engage() {
       setdata(response);
       if (response && response.length > 0) {
         setChatData(response[0]);
+        chatWithUser(response[0]);
       }
     }).catch((error) => {
       toast.error("Something Went Wrong");
@@ -32,7 +33,7 @@ function Engage() {
   const chatWithUser = (item) => {
     var obj = {};
     obj.from_id = HelperService.getLoginUserData('id');
-    obj.to_id = chatData.id;
+    obj.to_id = item.id;
     GetApi("/chat/all/list", obj).then((response) => {
       setChatList(response);
       setChatData(item);
@@ -151,48 +152,25 @@ function Engage() {
 
                 </div>
               </div>
-              {
-                chatList && chatList.length > 0 && chatList.map((item, index) => {
-                  return (
-                    HelperService.getLoginUserData('id') != item.from_id ?
-                      // <div className="chat-message-group">
-                      //   <img decoding="async" src={profileImage} alt="" className="chat-message-avatar" />
-                      //   <div className="chat-messages">
-                      //     <div className="chat-message-container">
-                      //       <div className="chat-message chat-message-first">
-                      //         {/* <div className="chat-message-sender">Kshitiz</div> */}
-                      //         {item?.message}
-                      //         <span className="chat-message-time">7:22 am</span>
-                      //       </div>
-                      //     </div>
-                      //   </div>
-                      // </div>
-                      <div
-                        className="message received"
-                        style={{ float: 'left', width: '100vw' }}>
-                        <p>{item.message}</p>
-                        <span className="timestamp">10:00 AM</span>
-                      </div>
-                      :
-                      // <div className="chat-message-group2">
-                      //   <img decoding="async" src={profileImage} alt="" className="chat-message-avatar" />
-                      //   <div className="chat-messages">
-                      //     <div className="chat-message-container">
-                      //       <div className="chat-message chat-message-first">
-                      //         {/* <div className="chat-message-sender">Kshitiz</div> */}
-                      //         {item?.message}
-                      //         <span className="chat-message-time">8:22 am</span>
-                      //       </div>
-                      //     </div>
-                      //   </div>
-                      // </div>
-                      <div className="message sent" style={{ float: 'right', width: '100vw' }}>
-                        <p>{item.message}</p>
-                        <span className="timestamp">10:01 AM</span>
-                      </div>
-                  )
-                })
-              }
+              <div>
+                {
+                  chatList && chatList.length > 0 && chatList.map((item, index) => {
+                    return (
+                      HelperService.getLoginUserData('id') != item.from_id ?
+                        <div
+                          className=" message received"
+                          style={{ float: 'left', width: '100vw' }}>
+                          <p className="">{item.message}
+                            <div><span className="timestamp">10:00 AM</span></div></p>
+                        </div>
+                        :
+                        <div className=" message sent" style={{ float: 'right', width: '100vw' }}>
+                          <p className=" chat-message-first">{item.message}<div><span className="timestamp">10:01 AM</span></div></p>
+                        </div>
+                    )
+                  })
+                }
+              </div>
               <div style={{ marginTop: '250px' }}>
                 <form onSubmit={handleSubmit(onSendMessage)}>
                   <div className="input-group">
