@@ -14,8 +14,10 @@ const API_URL = "http://localhost:8080";
 //   }
 // };
 export const GetApi = (url, obj) => {
+  const queryParams = new URLSearchParams(obj).toString();
+  const fullUrl = `${API_URL}${url}?${queryParams}`;
   return new Promise((resolve, reject) => {
-    axios.get(`${API_URL}` + url, {})
+    axios.get(`${fullUrl}`)
       .then((response) => {
         resolve(response.data);
       })
