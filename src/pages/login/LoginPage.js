@@ -1,10 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import "./LoginPage.css";
-import { PostApi } from "../../services/ApiService";
 import { toast } from "react-toastify";
+import { PostApi } from "../../services/ApiService";
 import HelperService from "../../services/HelperService";
+import "./LoginPage.css";
 
 const LoginPage = (props) => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const LoginPage = (props) => {
   console.log('errors', errors)
   const handleLogin = (data) => {
     PostApi("/users/login", data).then((response) => {
-      toast.success("Login successfully");
+      // toast.success("Login successfully");
       localStorage.setItem('UserData', JSON.stringify(response)); 
       console.log('object', HelperService.getLoginUserData('mobile'))
       props.onLogin()
