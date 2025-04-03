@@ -55,7 +55,7 @@ body {
   height: 8vh;
   width: 90vw;
   top: 68px;
-  position: fixed;
+  /* position: fixed; */
   /* background-color: var(--side-header-color,rgb(33, 134, 206)); */
 }
 

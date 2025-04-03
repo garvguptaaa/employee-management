@@ -20,6 +20,7 @@ import SalarySlipsForm from "../../pages/salary-slips/salary-slips-form";
 import { GetApi } from "../../services/ApiService";
 import HelperService from "../../services/HelperService";
 import "./SideBar.css";
+import { Col, Row } from "reactstrap";
 
 function SideBar(props) {
   const navigate = useNavigate();
@@ -53,40 +54,38 @@ function SideBar(props) {
     <>
       <div className="d-flex h-100" >
         <div>
-          <div className="header">
-            <div className="logo">
-              <Link to="/">
-                {/* <img src={Logo} alt="" className="image" /> */}
-                TeamPulse
-              </Link>
-            </div>
-            <div className="text">
-              {/* <p> EMPLOYEE MANAGEMENT APP</p> */}
-            </div>
-            <div className="search-container">
-              <form>
-                <input
-                  type="text"
-                  placeholder="Search employees or actions (Ex: Apply Leave)"
-                />
-              </form>
-            </div>
-            <div className="dropdown-profile-icon ">
-              <div className="profile-icon" onClick={toggleDropdown}>
-                <img src={profileImage} alt="Profile" className="profile-img" />
-              </div>
-              {isOpen && (
-                <div className="dropdown-content">
-                  <Link
-                    to="/profile"
-                    onClick={() => {
-                      setIsOpen(false);
-                    }}
-                  >
-                    My Profile
-                  </Link>
-                  <Link onClick={Logout}>Logout</Link>
-                  <div className="theme-container">
+          <Row>
+            <Col lg={12} className="header">
+              <Col lg={1} className="logo">
+                <Link to="/">
+                  {/* <img src={Logo} alt="" className="image" /> */}
+                  TeamPulse
+                </Link>
+              </Col>
+              <Col lg={2} className="search-container" style={{display:"content"}}>
+                <form>
+                  <input
+                    type="text"
+                    placeholder="Search employees or actions (Ex: Apply Leave)"
+                  />
+                </form>
+              </Col>
+              <Col lg={9} className="dropdown-profile-icon " style={{ display: "flex", justifyContent: "end" }}>
+                <div className="profile-icon" onClick={toggleDropdown}>
+                  <img src={profileImage} alt="Profile" className="profile-img" />
+                </div>
+                {isOpen && (
+                  <div className="dropdown-content">
+                    <Link
+                      to="/profile"
+                      onClick={() => {
+                        setIsOpen(false);
+                      }}
+                    >
+                      My Profile
+                    </Link>
+                    <Link onClick={Logout}>Logout</Link>
+                    {/* <div className="theme-container">
                     <form>
                       <input
                         type="color"
@@ -107,11 +106,12 @@ function SideBar(props) {
                         }}
                       />
                     </form>
+                  </div> */}
                   </div>
-                </div>
-              )}
-            </div>
-          </div>
+                )}
+              </Col>
+            </Col>
+          </Row>
           {userType == 'ADMIN' ?
             <div className="sidebar">
               <div className="side-container">
