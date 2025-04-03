@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.text-danger {
+  color: red;
+  font-weight: bold;
+}
+.user-shadow {
+  box-shadow: 0 4px 8px grey, 0 6px 20px grey;
+  height: 90vh;
+  margin-top: 20px !important;
+}
+.filter-header {
+  display: flex;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 6px 10px;
+  padding-left: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #000 !important;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-weight: 600 !important;
+}
+.header-shadow {
+  box-shadow: 0 4px 8px grey, 0 6px 20px grey;;
+  height: 8vh;
+  width: 90vw;
+  top: 68px;
+  position: fixed;
+  /* background-color: var(--side-header-color,rgb(33, 134, 206)); */
+}
+
+.login-box {
+  background-color: white;
+  padding: 40px;
+  /* border-radius: 50px; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  color: #019b96 !important;
+}
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+.header-class {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  font-size: 14px;
+  color: #666;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.input-group input:focus {
+  border-color: #01a3a4;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #01a3a4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #019b96;
+}
+
+.forgot-password {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.forgot-password a {
+  color: #01a3a4;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
