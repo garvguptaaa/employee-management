@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { DeleteApi, GetApi } from "../../services/ApiService";
 import { toast } from "react-toastify";
 import './home.css';
+import dashboard from "../../assets/dashboard.png";
 
 const Home = (props) => {
   const navigate = useNavigate();
@@ -40,9 +41,9 @@ const Home = (props) => {
   };
   return (
     <div>
-      <div className="header-class header-shadow P-4">
-        <div style={{ height: '90vh', overflowY: 'scroll',padding:'20px' }}>
-          <Row>
+      {/* <div className="header-class header-shadow P-4"> */}
+        {/* <div style={{ height: '90vh', overflowY: 'scroll', padding: '20px' }}> */}
+          {/* <Row>
             <Col lg={3}>
               <div>
                 <div className="p-3" style={{ backgroundColor: '#64c3d1', borderRadius: '10px', marginLeft: '10px', color: 'white' }}>
@@ -85,9 +86,12 @@ const Home = (props) => {
             <Col lg={9}>
 
             </Col>
-          </Row>
-        </div>
-      </div>
+          </Row> */}
+          {/* dashboard.png */}
+     
+        {/* </div> */}
+      {/* </div> */}
+      <img src={dashboard} alt="Profile" style={{ width: '90vw', height: '90vh' }} />
     </div>
   );
 };
