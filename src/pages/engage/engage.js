@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import "./engage.css";
-import { Col, Row } from 'reactstrap';
-import { GetApi, PostApi } from '../../services/ApiService';
-import { toast } from 'react-toastify';
-import profileImage from "../../assets/ProfilePhoto.png";
-import HelperService from '../../services/HelperService';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { Col, Row } from 'reactstrap';
+import profileImage from "../../assets/ProfilePhoto.png";
+import { GetApi, PostApi } from '../../services/ApiService';
+import HelperService from '../../services/HelperService';
+import "./engage.css";
 
 function Engage() {
   const {
@@ -59,7 +59,7 @@ function Engage() {
     <>
       <Row>
         <Col lg={3}>
-          <title>WhatsApp</title>
+          <title>chat</title>
           <div id="sidebar-header">
             {/* <img decoding="async" src="https://picsum.photos/id/10/50" alt="" className="avatar" id="profile-image" /> */}
             <div className="toolbar">
